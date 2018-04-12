@@ -11,10 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="owner")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
 
 	@Id
@@ -25,9 +27,31 @@ public class Owner {
 	
 	private String gender;
 	
+	private String email;
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL,orphanRemoval=true)
 	@JsonManagedReference
 	private Set<Vehicle> vehicles = new HashSet<>();
+	
+	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL,orphanRemoval=true)
+	@JsonManagedReference
+	private Set<ServiceDetails> services = new HashSet<>();
+
+	public Set<ServiceDetails> getServices() {
+		return services;
+	}
+
+	public void setServices(Set<ServiceDetails> services) {
+		this.services = services;
+	}
 
 	public Set<Vehicle> getVehicles() {
 		return vehicles;
@@ -63,8 +87,5 @@ public class Owner {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	
-	
 	
 }
