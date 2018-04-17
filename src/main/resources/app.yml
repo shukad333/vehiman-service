@@ -1,0 +1,5 @@
+oauth:
+  clientId: 625045819598-2b52jfgtg1amkmeo8ulbnnvn9mm6cfv3.apps.googleusercontent.com
+  clientSecret: NgHMuKnB60RzMUoOq_oQ2dCB
+  checkTokenUrl: https://www.googleapis.com/oauth2/v3/tokeninfo?access_token={accessToken}
+  userInfoUrl: https://www.googleapis.com/plus/v1/people/me

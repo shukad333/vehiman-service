@@ -20,12 +20,16 @@ public class VehicleService {
 	@Autowired
 	private OwnerRepository ownerRepository;
 	
-	public List<Vehicle> getVehiclesByOwner(long ownerId) {
-		return vehicleRepository.findByOwner(ownerId);
+	public List<Vehicle> getVehiclesByOwner(String email) {
+		Owner owner = ownerRepository.getOwnerByEmail(email);
+		if(null != owner) {
+		return vehicleRepository.findByOwner(owner.getId());
+		}
+		return null;
 	}
 	
-	public Owner addVehiclesToOwner(long ownerId,List<Vehicle> vehicles) {
-		Owner owner = ownerRepository.findById(ownerId).orElse(null);
+	public Owner addVehiclesToOwner(String email,List<Vehicle> vehicles) {
+		Owner owner = ownerRepository.getOwnerByEmail(email);
 		if(null!=owner) {
 			if(!CollectionUtils.isEmpty(vehicles)) {
 				for(Vehicle vehicle : vehicles) {
@@ -34,6 +38,7 @@ public class VehicleService {
 				}
 			}
 		}
-		return ownerRepository.findById(ownerId).orElse(null);
+		return ownerRepository.getOwnerByEmail(email);
 	}
+	
 }

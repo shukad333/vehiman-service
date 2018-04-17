@@ -30,14 +30,18 @@ public class ServiceDetailsService {
 		return serviceDetailsRepository.findAll();
 	}
 
-	public List<ServiceDetails> getAllServiceDetailsOfOwner(long ownerId) {
-		return serviceDetailsRepository.findByOwner(ownerId);
+	public List<ServiceDetails> getAllServiceDetailsOfOwner(String email) {
+		Owner owner = ownerRepository.getOwnerByEmail(email);
+		if(null!=owner)
+		return serviceDetailsRepository.findByOwner(owner.getId());
+		
+		return null;
 	}
 
-	public List<ServiceDetails> addServiceDetail(long ownerId, List<ServiceDetails> serviceDetails) {
+	public List<ServiceDetails> addServiceDetail(String email, List<ServiceDetails> serviceDetails) {
 
 		logger.info("In add service details");
-		Owner owner = ownerRepository.findById(ownerId).orElse(null);
+		Owner owner = ownerRepository.getOwnerByEmail(email);
 		if (null != owner) {
 			if (!CollectionUtils.isEmpty(serviceDetails)) {
 				for (ServiceDetails serviceDetail : serviceDetails) {
@@ -47,8 +51,11 @@ public class ServiceDetailsService {
 				serviceDetailsRepository.saveAll(serviceDetails);
 			}
 		}
-
-		return serviceDetailsRepository.findByOwner(ownerId);
+		
+		if(null != owner)
+		return serviceDetailsRepository.findByOwner(owner.getId());
+		
+		return null;
 	}
 
 	public ServiceDetails editServiceDetails(long serviceId, ServiceDetails serviceDetails) {

@@ -15,6 +15,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * 
+ * @author shukad333
+ *
+ */
 @Entity
 @Table(name = "service_details")
 public class ServiceDetails {

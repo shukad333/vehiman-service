@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,26 +48,28 @@ public class OwnerController {
 		return new ResponseEntity<Owner>(ownerService.getDetails(ownerId),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="{ownerId}/vehicles")
-	public ResponseEntity<List<Vehicle>> getVehiclesOfOwner(@PathVariable("ownerId") long ownerId) {
+	@GetMapping(value="{email}/vehicles")
+	public ResponseEntity<List<Vehicle>> getVehiclesOfOwner(@PathVariable("email") String email) {
 		
-		return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(ownerId),HttpStatus.ACCEPTED);
+		Authentication holder = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(holder.getName()+"  "+holder.getPrincipal());
+		return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(email),HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping(value="{ownerId}/services")
-	public ResponseEntity<List<ServiceDetails>> getServicesOfOwner(@PathVariable("ownerId") long ownerId) {
+	@GetMapping(value="{email}/services")
+	public ResponseEntity<List<ServiceDetails>> getServicesOfOwner(@PathVariable("email") String email) {
 		
-		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.getAllServiceDetailsOfOwner(ownerId),HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.getAllServiceDetailsOfOwner(email),HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value="{ownerId}/vehicles")
-	public ResponseEntity<Owner> addVehicles(@PathVariable("ownerId") long ownerId,@RequestBody List<Vehicle> vehicles) {
-		return new ResponseEntity<Owner>(vehicleService.addVehiclesToOwner(ownerId, vehicles),HttpStatus.ACCEPTED);
+	@PutMapping(value="{email}/vehicles")
+	public ResponseEntity<Owner> addVehicles(@PathVariable("email") String email,@RequestBody List<Vehicle> vehicles) {
+		return new ResponseEntity<Owner>(vehicleService.addVehiclesToOwner(email, vehicles),HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value="{ownerId}/services")
-	public ResponseEntity<List<ServiceDetails>> addServices(@PathVariable("ownerId") long ownerId,@RequestBody List<ServiceDetails> services) {
-		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.addServiceDetail(ownerId, services),HttpStatus.ACCEPTED);
+	@PutMapping(value="{email}/services")
+	public ResponseEntity<List<ServiceDetails>> addServices(@PathVariable("email") String email,@RequestBody List<ServiceDetails> services) {
+		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.addServiceDetail(email, services),HttpStatus.ACCEPTED);
 	}
 
 }
