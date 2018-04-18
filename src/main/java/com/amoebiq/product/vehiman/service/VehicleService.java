@@ -28,7 +28,7 @@ public class VehicleService {
 		return null;
 	}
 	
-	public Owner addVehiclesToOwner(String email,List<Vehicle> vehicles) {
+	public List<Vehicle> addVehiclesToOwner(String email,List<Vehicle> vehicles) {
 		Owner owner = ownerRepository.getOwnerByEmail(email);
 		if(null!=owner) {
 			if(!CollectionUtils.isEmpty(vehicles)) {
@@ -38,7 +38,7 @@ public class VehicleService {
 				}
 			}
 		}
-		return ownerRepository.getOwnerByEmail(email);
+		return vehicleRepository.findByOwner(owner.getId());
 	}
 	
 }

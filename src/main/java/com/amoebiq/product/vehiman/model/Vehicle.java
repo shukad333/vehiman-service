@@ -25,8 +25,8 @@ public class Vehicle {
 	@Column(name="type")
 	private String type;
 	
-	@Column(name="model")
-	private String model;
+	@Column(name="number")
+	private String number;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="owner_id",nullable=false)
@@ -58,12 +58,12 @@ public class Vehicle {
 		this.type = type;
 	}
 
-	public String getModel() {
-		return model;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public void setNumber(String model) {
+		this.number = model;
 	}
 	
 	public Owner getOwner() {

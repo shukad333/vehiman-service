@@ -34,9 +34,14 @@ public class ServiceDetails {
 	@Column(name = "is_done",nullable = false, columnDefinition = "TINYINT", length = 1)
 	private Boolean done;
 	
-	@Column(name="due_date")
+	@Column(name="service_date")
 	@JsonFormat(pattern = "dd-MMM-yyyy")
-	private Date dueDate;
+	private Date serviceDate;
+	
+	@Column(name="next_service_date")
+	@JsonFormat(pattern = "dd-MMM-yyyy")
+	private Date nextServiceDate;
+	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="owner_id",nullable=false)
@@ -87,11 +92,11 @@ public class ServiceDetails {
 		this.serviceType = serviceType;
 	}
 	
-	public Date getDueDate() {
-		return dueDate;
+	public Date getServiceDate() {
+		return serviceDate;
 	}
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
 	}
 	
 	
