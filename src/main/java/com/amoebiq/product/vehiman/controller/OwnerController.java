@@ -67,9 +67,9 @@ public class OwnerController {
 		return new ResponseEntity<List<Vehicle>>(vehicleService.addVehiclesToOwner(email, vehicles),HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value="{email}/services")
-	public ResponseEntity<List<ServiceDetails>> addServices(@PathVariable("email") String email,@RequestBody List<ServiceDetails> services) {
-		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.addServiceDetail(email, services),HttpStatus.ACCEPTED);
+	@PutMapping(value="{email}/vehicle/{vehicleId}/services")
+	public ResponseEntity<List<ServiceDetails>> addServices(@PathVariable("email") String email,@PathVariable("vehicleId") long vehicleId,@RequestBody List<ServiceDetails> services) {
+		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.addServiceDetail(email,vehicleId, services),HttpStatus.ACCEPTED);
 	}
 
 }

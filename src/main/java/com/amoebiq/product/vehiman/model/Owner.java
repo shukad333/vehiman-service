@@ -38,11 +38,11 @@ public class Owner {
 	}
 	
 	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL,orphanRemoval=true)
-	@JsonManagedReference
+	@JsonManagedReference(value="vehicle_owner_ref")
 	private Set<Vehicle> vehicles = new HashSet<>();
 	
 	@OneToMany(mappedBy="owner",cascade=CascadeType.ALL,orphanRemoval=true)
-	@JsonManagedReference
+	@JsonManagedReference(value="service_owner_ref")
 	private Set<ServiceDetails> services = new HashSet<>();
 
 	public Set<ServiceDetails> getServices() {

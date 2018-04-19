@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.amoebiq.product.vehiman.model.Owner;
 import com.amoebiq.product.vehiman.model.ServiceDetails;
+import com.amoebiq.product.vehiman.model.Vehicle;
 import com.amoebiq.product.vehiman.respository.OwnerRepository;
 import com.amoebiq.product.vehiman.respository.ServiceDetailsRepository;
+import com.amoebiq.product.vehiman.respository.VehicleRepository;
 
 @Service
 public class ServiceDetailsService {
@@ -25,6 +27,9 @@ public class ServiceDetailsService {
 
 	@Autowired
 	private OwnerRepository ownerRepository;
+	
+	@Autowired
+	private VehicleRepository vehicleRepository;
 
 	public List<ServiceDetails> getAllServiceDetails() {
 		return serviceDetailsRepository.findAll();
@@ -38,14 +43,16 @@ public class ServiceDetailsService {
 		return null;
 	}
 
-	public List<ServiceDetails> addServiceDetail(String email, List<ServiceDetails> serviceDetails) {
+	public List<ServiceDetails> addServiceDetail(String email,Long vehicleId,List<ServiceDetails> serviceDetails) {
 
 		logger.info("In add service details");
 		Owner owner = ownerRepository.getOwnerByEmail(email);
+		Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
 		if (null != owner) {
 			if (!CollectionUtils.isEmpty(serviceDetails)) {
 				for (ServiceDetails serviceDetail : serviceDetails) {
 					serviceDetail.setOwner(owner);
+					serviceDetail.setVehicle(vehicle);
 					logger.info("Current odo {}", serviceDetail.getCurrentOdo());
 				}
 				serviceDetailsRepository.saveAll(serviceDetails);

@@ -44,10 +44,28 @@ public class ServiceDetails {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="vehicle_id",nullable=false)
+	@JsonBackReference(value="service_ref")
+	private Vehicle vehicle;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="owner_id",nullable=false)
-	@JsonBackReference
+	@JsonBackReference(value="service_owner_ref")
 	private Owner owner;
 	
+	
+	public Date getNextServiceDate() {
+		return nextServiceDate;
+	}
+	public void setNextServiceDate(Date nextServiceDate) {
+		this.nextServiceDate = nextServiceDate;
+	}
+	public Owner getOwner() {
+		return owner;
+	}
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
 	@Column(name="current_odo")
 	private Long currentOdo;
 	
@@ -73,11 +91,11 @@ public class ServiceDetails {
 	public void setNextServiceOdo(Long nextServiceOdo) {
 		this.nextServiceOdo = nextServiceOdo;
 	}
-	public Owner getOwner() {
-		return owner;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
-	public void setOwner(Owner owner) {
-		this.owner = owner;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 	public long getId() {
 		return id;
