@@ -38,6 +38,17 @@ public class Vehicle {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="wheel")
+	private int noOfWheels;
+	
+	public int getNoOfWheels() {
+		return noOfWheels;
+	}
+
+	public void setNoOfWheels(int noOfWheels) {
+		this.noOfWheels = noOfWheels;
+	}
+
 	@Column(name="brand")
 	private String brand;
 	
