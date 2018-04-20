@@ -1,5 +1,6 @@
 package com.amoebiq.product.vehiman.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,9 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="vehicles")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Vehicle {
 	public Set<ServiceDetails> getServices() {
 		return services;
@@ -26,6 +29,9 @@ public class Vehicle {
 
 	public void setServices(Set<ServiceDetails> services) {
 		this.services = services;
+		for(ServiceDetails serviceDetails : services) {
+			serviceDetails.setVehicle(this);
+		}
 	}
 
 	@Id
@@ -48,7 +54,7 @@ public class Vehicle {
 	
 	@OneToMany(mappedBy="vehicle",cascade=CascadeType.ALL,orphanRemoval=true)
 	@JsonBackReference(value="service_ref")
-	private Set<ServiceDetails> services;
+	private Set<ServiceDetails> services = new HashSet<>();
 
 	public Long getId() {
 		return id;

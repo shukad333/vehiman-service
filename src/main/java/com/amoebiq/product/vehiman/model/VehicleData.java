@@ -1,42 +1,59 @@
 package com.amoebiq.product.vehiman.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name="service_types")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class ServiceType {
+@Table(name="vehicle_data")
+public class VehicleData {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@Column(name="wheel")
+	private int numOfWheels;
+	
+	private String make;
+	
 	private String type;
-	private String description;
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public int getNumOfWheels() {
+		return numOfWheels;
+	}
+
+	public void setNumOfWheels(int numOfWheels) {
+		this.numOfWheels = numOfWheels;
+	}
+
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 	
 	
 }

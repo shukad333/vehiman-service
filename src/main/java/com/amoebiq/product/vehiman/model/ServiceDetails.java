@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * 
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 @Entity
 @Table(name = "service_details")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ServiceDetails {
 
 	@Id
@@ -45,7 +47,6 @@ public class ServiceDetails {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="vehicle_id",nullable=false)
-	@JsonBackReference(value="service_ref")
 	private Vehicle vehicle;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

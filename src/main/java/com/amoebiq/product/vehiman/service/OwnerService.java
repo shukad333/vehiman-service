@@ -16,8 +16,8 @@ public class OwnerService {
 		return ownerRepository.save(owner);
 	}
 	
-	public Owner getDetails(long ownerId) {
-		return ownerRepository.getOne(ownerId);
+	public Owner getDetails(String email) {
+		return ownerRepository.getOwnerByEmail(email);
 	}
 	
 

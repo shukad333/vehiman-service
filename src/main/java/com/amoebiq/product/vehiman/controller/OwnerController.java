@@ -42,13 +42,13 @@ public class OwnerController {
 		return new ResponseEntity<Owner>(ownerService.addOwner(owner),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="{ownerId}")
-	public ResponseEntity<Owner> getDetails(@PathVariable("ownerId") long ownerId) {
+	@GetMapping(value="{email}")
+	public ResponseEntity<Owner> getDetails(@PathVariable("email") String email) {
 		
-		return new ResponseEntity<Owner>(ownerService.getDetails(ownerId),HttpStatus.CREATED);
+		return new ResponseEntity<Owner>(ownerService.getDetails(email),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="{email}/vehicles")
+	@GetMapping(value="{email}/vehicle")
 	public ResponseEntity<List<Vehicle>> getVehiclesOfOwner(@PathVariable("email") String email) {
 		
 		Authentication holder = SecurityContextHolder.getContext().getAuthentication();
@@ -56,13 +56,13 @@ public class OwnerController {
 		return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(email),HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping(value="{email}/services")
+	@GetMapping(value="{email}/service")
 	public ResponseEntity<List<ServiceDetails>> getServicesOfOwner(@PathVariable("email") String email) {
 		
 		return new ResponseEntity<List<ServiceDetails>>(serviceDetailsService.getAllServiceDetailsOfOwner(email),HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping(value="{email}/vehicles")
+	@PutMapping(value="{email}/vehicle")
 	public ResponseEntity<List<Vehicle>> addVehicles(@PathVariable("email") String email,@RequestBody List<Vehicle> vehicles) {
 		return new ResponseEntity<List<Vehicle>>(vehicleService.addVehiclesToOwner(email, vehicles),HttpStatus.ACCEPTED);
 	}
