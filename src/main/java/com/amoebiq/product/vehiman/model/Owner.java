@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 //Comm1
 //Comm3
+//Comm5
 @Entity
 @Table(name="owner")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
