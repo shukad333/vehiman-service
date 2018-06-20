@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+//comm2 
 @Entity
 @Table(name="vehicles")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
