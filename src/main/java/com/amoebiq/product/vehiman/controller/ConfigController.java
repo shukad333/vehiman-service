@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amoebiq.product.vehiman.model.ServiceType;
-import com.amoebiq.product.vehiman.respository.VehicleDataRepository;
+import com.amoebiq.product.vehiman.repository.VehicleDataRepository;
 import com.amoebiq.product.vehiman.service.ServiceTypeService;
 import com.amoebiq.product.vehiman.service.VehicleDataService;
 

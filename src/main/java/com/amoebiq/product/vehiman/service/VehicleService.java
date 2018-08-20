@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.amoebiq.product.vehiman.model.Owner;
 import com.amoebiq.product.vehiman.model.Vehicle;
-import com.amoebiq.product.vehiman.respository.OwnerRepository;
-import com.amoebiq.product.vehiman.respository.VehicleRepository;
+import com.amoebiq.product.vehiman.repository.OwnerRepository;
+import com.amoebiq.product.vehiman.repository.VehicleRepository;
 
 @Service
 public class VehicleService {

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amoebiq.product.vehiman.model.ServiceType;
-import com.amoebiq.product.vehiman.respository.ServiceTypeRepository;
+import com.amoebiq.product.vehiman.repository.ServiceTypeRepository;
 
 @Service
 public class ServiceTypeService {

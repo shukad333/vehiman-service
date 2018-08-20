@@ -1,4 +1,4 @@
-package com.amoebiq.product.vehiman.respository;
+package com.amoebiq.product.vehiman.repository;
 
 import java.util.List;
 

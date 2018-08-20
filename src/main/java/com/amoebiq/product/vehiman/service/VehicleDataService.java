@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amoebiq.product.vehiman.model.VehicleData;
-import com.amoebiq.product.vehiman.respository.VehicleDataRepository;
+import com.amoebiq.product.vehiman.repository.VehicleDataRepository;
 
 @Service
 public class VehicleDataService {

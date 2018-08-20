@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amoebiq.product.vehiman.model.Owner;
-import com.amoebiq.product.vehiman.respository.OwnerRepository;
+import com.amoebiq.product.vehiman.repository.OwnerRepository;
 
 @Service
 public class OwnerService {
