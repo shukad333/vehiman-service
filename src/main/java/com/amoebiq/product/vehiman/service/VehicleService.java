@@ -21,7 +21,9 @@ public class VehicleService {
 	private OwnerRepository ownerRepository;
 	
 	public List<Vehicle> getVehiclesByOwner(String email) {
+		System.out.println("Email is XXXXX "+email);
 		Owner owner = ownerRepository.getOwnerByEmail(email);
+		System.out.println("XXXX Owner is "+owner.getId());
 		if(null != owner) {
 		return vehicleRepository.findByOwner(owner.getId());
 		}

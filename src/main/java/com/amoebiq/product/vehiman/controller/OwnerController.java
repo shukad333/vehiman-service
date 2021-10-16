@@ -2,6 +2,9 @@ package com.amoebiq.product.vehiman.controller;
 
 import java.util.List;
 
+import com.amoebiq.product.vehiman.model.Status;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,8 @@ import com.amoebiq.product.vehiman.service.VehicleService;
 @RestController
 @RequestMapping(path="/owner")
 public class OwnerController {
+
+	private static final Logger logger = LogManager.getLogger(OwnerController.class);
 	
 	@Autowired
 	private OwnerService ownerService;
@@ -35,6 +40,13 @@ public class OwnerController {
 	
 	@Autowired
 	private ServiceDetailsService serviceDetailsService;
+
+	@GetMapping(value="/health")
+	public ResponseEntity<Status> health() {
+		Status status = new Status();
+		status.setMessage("green");
+		return new ResponseEntity<Status>(status,HttpStatus.OK);
+	}
 	
 	@PostMapping(value="/add")
 	public ResponseEntity<Owner> addOwner(@RequestBody Owner owner) {
@@ -42,10 +54,16 @@ public class OwnerController {
 		return new ResponseEntity<Owner>(ownerService.addOwner(owner),HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value="{email}")
+	@GetMapping(value="info/{email}")
 	public ResponseEntity<Owner> getDetails(@PathVariable("email") String email) {
+		logger.info("Got request {}",email);
+		return new ResponseEntity<Owner>(ownerService.getDetails(email),HttpStatus.OK);
+	}
+
+	@GetMapping(value="all")
+	public ResponseEntity<List<Owner>> all() {
 		
-		return new ResponseEntity<Owner>(ownerService.getDetails(email),HttpStatus.CREATED);
+		return new ResponseEntity<List<Owner>>(ownerService.getAllOwners(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="{email}/vehicle")
@@ -53,7 +71,7 @@ public class OwnerController {
 		
 		Authentication holder = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(holder.getName()+"  "+holder.getPrincipal());
-		return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(email),HttpStatus.ACCEPTED);
+		return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(email),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="{email}/service")

@@ -11,3 +11,4 @@ public class VehimanApplication {
 		SpringApplication.run(VehimanApplication.class, args);
 	}
 }
+
