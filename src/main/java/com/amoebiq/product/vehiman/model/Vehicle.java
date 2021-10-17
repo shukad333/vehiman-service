@@ -37,17 +37,6 @@ public class Vehicle {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="wheel")
-	private int noOfWheels;
-	
-	public int getNoOfWheels() {
-		return noOfWheels;
-	}
-
-	public void setNoOfWheels(int noOfWheels) {
-		this.noOfWheels = noOfWheels;
-	}
 
 	@Column(name="brand")
 	private String brand;
@@ -57,7 +46,18 @@ public class Vehicle {
 	
 	@Column(name="number")
 	private String number;
-	
+
+	@Column(name="name")
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="owner_id",nullable=false)
 	@JsonBackReference(value="vehicle_owner_ref")

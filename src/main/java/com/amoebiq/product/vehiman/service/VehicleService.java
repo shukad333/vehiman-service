@@ -30,17 +30,12 @@ public class VehicleService {
 		return null;
 	}
 	
-	public List<Vehicle> addVehiclesToOwner(String email,List<Vehicle> vehicles) {
+	public Vehicle addVehiclesToOwner(String email,Vehicle vehicle) {
 		Owner owner = ownerRepository.getOwnerByEmail(email);
-		if(null!=owner) {
-			if(!CollectionUtils.isEmpty(vehicles)) {
-				for(Vehicle vehicle : vehicles) {
-					vehicle.setOwner(owner);
-					vehicleRepository.save(vehicle);
-				}
-			}
-		}
-		return vehicleRepository.findByOwner(owner.getId());
+		vehicle.setOwner(owner);
+		return vehicleRepository.save(vehicle);
+
+
 	}
 	
 }
