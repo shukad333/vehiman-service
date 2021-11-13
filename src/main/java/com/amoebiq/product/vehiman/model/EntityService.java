@@ -1,6 +1,7 @@
 package com.amoebiq.product.vehiman.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 
@@ -17,9 +18,10 @@ public class EntityService {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="entity_id",nullable=true)
     @JsonManagedReference(value="entity_service_ref")
+//    @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"},ignoreUnknown = true)
     private ProductEntity entity;
 
 //    @Column(name = "service_type")

@@ -32,4 +32,9 @@ public class ProductEntityController {
     public ResponseEntity<EntityService> newEntityService(@RequestBody EntityService entityService, @PathVariable("entityId")UUID entityId) {
         return new ResponseEntity<>(productEntityService.saveProductEntityService(entityService,entityId),HttpStatus.CREATED);
     }
+
+    @GetMapping(value = "{entityId}/service")
+    public ResponseEntity<List<EntityService>> getEntitiesServicesByEntityId(@PathVariable("entityId")UUID entityId) {
+        return new ResponseEntity<>(productEntityService.getEntityServicesByEntityId(entityId),HttpStatus.OK);
+    }
 }

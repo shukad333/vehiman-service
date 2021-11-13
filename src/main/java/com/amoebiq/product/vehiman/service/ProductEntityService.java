@@ -34,4 +34,10 @@ public class ProductEntityService {
         entityService.setProductEntity(entity);
         return entityServiceRepository.save(entityService);
     }
+
+
+    public List<EntityService> getEntityServicesByEntityId(UUID entityId) {
+
+        return entityServiceRepository.findByEntityId(entityId);
+    }
 }
