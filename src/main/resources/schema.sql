@@ -7,6 +7,21 @@ CREATE TABLE IF NOT EXISTS `entity` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE IF NOT EXISTS `vehiman`.`entity_service` (
+  `id` VARCHAR(255) NOT NULL,
+  `entity_id` VARCHAR(255) NULL,
+  `serviceType` VARCHAR(45) NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`),
+  INDEX `entity_fk_idx` (`entity_id` ASC) VISIBLE,
+  CONSTRAINT `entity_fk`
+    FOREIGN KEY (`entity_id`)
+    REFERENCES `vehiman`.`entity` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
 CREATE TABLE IF NOT EXISTS `owner` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,

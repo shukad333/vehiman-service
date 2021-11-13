@@ -1,8 +1,12 @@
 package com.amoebiq.product.vehiman.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -22,6 +26,12 @@ public class ProductEntity {
 
     @Column
     private String type;
+
+    @OneToMany(mappedBy = "entity",cascade=CascadeType.ALL)
+    @JsonBackReference(value="entity_service_ref")
+    private Set<EntityService> entityServices =  new HashSet<>();
+
+
 
     @Column(name = "sub_type")
     private String subType;
@@ -64,5 +74,14 @@ public class ProductEntity {
 
     public void setSubType(String subType) {
         this.subType = subType;
+    }
+
+
+    public Set<EntityService> getEntityServices() {
+        return entityServices;
+    }
+
+    public void setEntityServices(Set<EntityService> entityServices) {
+        this.entityServices = entityServices;
     }
 }
