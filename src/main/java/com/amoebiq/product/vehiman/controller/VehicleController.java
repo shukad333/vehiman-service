@@ -23,7 +23,7 @@ public class VehicleController {
 
         String emailId = "shukad33@yahoo.com";
 
-        return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(emailId), HttpStatus.ACCEPTED);
+        return new ResponseEntity<List<Vehicle>>(vehicleService.getVehiclesByOwner(emailId), HttpStatus.OK);
 
     }
 
